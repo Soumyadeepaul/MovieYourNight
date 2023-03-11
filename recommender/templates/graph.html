@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph</title>
+</head>
+<body>
+    {% if chart %}
+    <a onclick="window.history.go(-1)"><h1>back</h1></a>
+    <img src="data:image/png;base64,{{chart|safe}}">
+    {% endif %}
+
+</body>
+</html>

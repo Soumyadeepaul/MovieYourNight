@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+
+    <style>
+      body, html {
+      height: 100%;
+      }
+
+      .bg {
+      /* The image used */
+      background-image: url("https://i0.wp.com/post.healthline.com/wp-content/uploads/2020/09/full-moon-night-landscape-1296x728-header-1.jpg?w=1845");
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      }
+      #result{
+                transition: transform 1s;
+
+      }
+      #result:hover {
+        transform: translateX(50%);
+      }
+    </style>
+
+</head>
+<body class = "bg">
+<!-- Nav Bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a style="font-size: 30px; font-family: 'Times New Roman', Times, serif; color: white">
+      <img src="https://www.linkpicture.com/q/logo_104.jpg" alt="MYN" width="60" height="60">
+      <b>MOVIE YOUR NIGHT</b>
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="home/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard/0all">Dashboard</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!--FORM-->
+<div>
+    <h2 id="hold" style="color: #faaac6; padding-left: 40%; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"></h2>
+</div>
+<div class="container py-5 text-center">
+    <div class="row">
+    <div class="col-6 col-md-4 p-3 mb-2 bg-black" style= "--bs-bg-opacity: .5;">
+        <form id="form" method="POST">
+          {% csrf_token %}
+          <div>
+              <h2 style="color:#03fcc2;">MYN your Movie</h2>
+              <hr style="color:#03fcc2; height:2px; border-width:1; background-color:red; opacity: 100%;">
+          </div>
+          <div class="mb-3 row g-3 align-items-center">
+            <div class="col-auto"></div>
+            <div class="col-auto"></div>
+            <div class="col-auto">
+                <label for="age" class="col-form-label" style="color: white;"><b>Age</b></label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="age" class="form-control" name="age" style="width: 50%; height: 1%" onclick="this.setSelectionRange(0, this.value.length)" required>
+
+            </div>
+            <div class="col-auto">
+                <p style="color: white">8<'age'<100</p>
+            </div>
+          </div>
+          <p id="errorage" style="color: red;"></p>
+          <div class="mb-3 row g-3 align-items-center">
+                  <div class="col-auto"></div>
+                  <div class="col-auto"></div>
+                  <div class="col-auto">
+                    <label for="year" class="col-form-label" style="color: white;"><b>Year</b></label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" id="year" class="form-control" name="year" placeholder="2014" style="width: 70%; height: 1%" value="SinceBeginning" onclick="this.setSelectionRange(0, this.value.length)" required>
+                  </div>
+                  <div class="col-auto">
+                        <p style="color: white">year<2024</p>
+                  </div>
+          </div>
+          <p id="erroryear" style="color: red;"></p>
+          <div class="mb-3 row g-3 align-items-center">
+                  <div class="col-auto"></div>
+                  <div class="col-auto"></div>
+                  <div class="col-auto">
+                      <label class="col-form-label" style="color: white;"><b>Genre</b></label>
+                  </div>
+                  <div class="col-auto">
+                      <select name='genre' id='genre' class="form-control" style="width: 110%; height: 1%;">
+                          <option value="all">OVERALL</option>
+                          <option value="comedy">Comedy</option>
+                          <option value="family">Family</option>
+                          <option value="short">Short</option>
+                          <option value="romance">Romance</option>
+                          <option value="fantasy">Fantasy</option>
+                          <option value="action">Action</option>
+                          <option value="sci_Fi">Sci-Fi</option>
+                          <option value="news">News</option>
+                          <option value="reality-TV">Reality-TV</option>
+                          <option value="horror">Horror</option>
+                          <option value="documentry">Documentry</option>
+                          <option value="history">History</option>
+                          <option value="war">War</option>
+                          <option value="film_Noir">Film-Noir</option>
+                          <option value="drama">Drama</option>
+                          <option value="talk_Show">Talk-Show</option>
+                          <option value="animation">Animation</option>
+                          <option value="adventure">Adventure</option>
+                          <option value="music">Music</option>
+                          <option value="game_Show">Game-Show</option>
+                          <option value="crime">Crime</option>
+                          <option value="musical">Musical</option>
+                          <option value="mystery">Mystery</option>
+                          <option value="thriller">Thriller</option>
+                          <option value="sport">Sport</option>
+                          <option value="western">Western</option>
+                          <option value="biography">Biography</option>
+                      </select>
+                  </div>
+
+          </div>
+          <button type="button" class="btn btn-outline-warning" onclick="history.go(0)">Redo</button>
+          <button type="submit" id='result' form="form" class="btn btn-outline-success" onclick="check()">Result</button>
+        </form>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="col-6 col-md-4">
+        <img id="movie1img" src="" style="">
+        <p id="movie1" style="color: red;"></p>
+    </div>
+    <div class="col-6 col-md-4"></div>
+    </div>
+    <div></div>
+    <div class="row">
+        <div class="col-6 col-md-4">
+            <p>Explore the latest feature <a href="" onclick="dash()" id="dash">Statistics</a> </p>
+
+        </div>
+        <div class="col-6 col-md-4"></div>
+        <div class="col-6 col-md-4"></div>
+    </div>
+
+
+
+</div>
+
+<script>
+    function check(){
+    var age=document.getElementById('age').value;
+    var year=document.getElementById('year').value;
+    if (age>99 || age<10){
+        alert('Wrong Age');
+        document.getElementById('age').value=21;
+        document.getElementById('year').value=year;
+        document.getElementById('errorage').innerHTML='Enter Correct Age';
+        document.getElementById('erroryear').innerHTML='';
+    }
+
+    else if ((year>2023 || year<1800) && year!='SinceBeginning'){
+        alert('Wrong year');
+        document.getElementById('age').value=age;
+        document.getElementById('errorage').innerHTML='';
+        document.getElementById('year').value='SinceBeginning';
+        document.getElementById('erroryear').innerHTML='Enter Correct Year/SinceBeginning';
+    }
+    else {
+    document.getElementById('errorage').innerHTML='';
+    document.getElementById('erroryear').innerHTML='';
+    document.getElementById('movie1img').src='https://m.media-amazon.com/images/M/MV5BODZhNzlmOGItMWUyYS00Y2Q5LWFlNzMtM2I2NDFkM2ZkYmE1XkEyXkFqcGdeQXVyMTU5OTA4NTIz._V1_UX67_CR0,0,67,98_AL_.jpg';
+    document.getElementById('movie1').innerHTML='Hello India!';
+    document.getElementById('movie1img').style= 'width: 40%; height: auto; image-resolution: 300dpi;'
+    }
+    }
+
+
+
+    function dash(){
+        var year=document.getElementById('year').value;
+        var genre=document.getElementById('genre').value;
+        document.getElementById('hold').innerHTML='Hold Your Breath';
+        if (year!='SinceBeginning'){
+            document.getElementById('dash').href='dashboard/'+year+genre;
+        }
+        else{
+            document.getElementById('dash').href='dashboard/'+0+genre;
+        }
+    }
+
+
+
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).on('submit','#form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "movies" %}',
+            data:{
+                age:$("#age").val(),
+                year:$("#year").val(),
+                genre:$("#genre").val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+        })
+    });
+</script>
+
+</body>
+
+</html>
