@@ -38,107 +38,33 @@ def get_graph():
     buffer.close()
     return graph
 
-def get_plot(rg,g,y):
-    if g == 'all' and y == 'all':
-        bar = rg["first_name"].value_counts()[1:16]
-        fig = px.bar(bar,
-               x = bar.index,
-               y = bar.values,
-               title="<b> Top 15 Stars Acted in movie in All genre, All Year </b>",
-               color_discrete_sequence=["#de5216"],
-               color = "first_name",
-               )
-        fig.update_layout(template = draft_template, paper_bgcolor = "black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            xaxis_title="Name of Stars",
-            yaxis_title="Total no of Movies",
-            autosize=False,
-            width=800,
-            height=500
-        )
-
-    elif g == "all" and y != "all":
-        data = rg[rg["start_year"] == y]
-        bar = data["first_name"].value_counts()[1:16]
-        fig = px.bar(bar,
-               x = bar.index,
-               y = bar.values,
-               title="<b> Top 15 Stars Acted in movie in All genre, Year - {} </b>".format(y),
-               color_discrete_sequence=["#AB63FA"],
-               color = "first_name"
-               )
-        fig.update_layout(template = draft_template, paper_bgcolor = "black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            xaxis_title="Name of Stars",
-            yaxis_title="Total no of Movies",
-            width = 800,
-            height = 500
-        )
-
-    elif g != "all" and y == "all":
-        data = rg[rg[g] == 1]
-        bar = data["first_name"].value_counts()[1:16]
-        fig = px.bar(bar,
-               x = bar.index,
-               y = bar.values,
-               title="<b> Top 15 Stars Acted in movie in {} genre, All Year </b>".format(g),
-               color_discrete_sequence=["#AB63FA"],
-               color = "first_name"
-               )
-        fig.update_layout(template = draft_template, paper_bgcolor = "black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            xaxis_title="Name of Stars",
-            yaxis_title="Total no of Movies",
-            width=800,
-            height=500
-        )
-
-    else:
-        data = rg[rg["start_year"] == y]
-        data = data[data[g] == 1]
-        bar = data["first_name"].value_counts()[1:16]
-        fig = px.bar(bar,
-                     x=bar.index,
-                     y=bar.values,
-                     title="<b> Top 15 Stars Acted in movie in {} genre, {} Year </b>".format(g, y),
-                     color_discrete_sequence=["#AB63FA"],
-                     color="first_name",
-
-                     )
-        fig.update_layout(template=draft_template, paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            xaxis_title="Name of Stars",
-            yaxis_title="Total no of Movies",
-            width=800,
-            height=500
-        )
+def get_plot(data,g,y):
+    bar = data["first_name"].value_counts()[1:16]
+    fig = px.bar(bar,
+       x = bar.index,
+       y = bar.values,
+       title="<b> Top 15 Stars Acted in movie in {} genre, {} year</b>".format(g, y),
+       text_auto='.2s',
+       color = "first_name",
+       width=800,
+       height=600,
+       )
+    fig.update_layout(template = draft_template, paper_bgcolor = "black")
+    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+    fig.update_layout(
+        font_color="white",
+        title_font_color="white",
+        xaxis_title="Name of Stars",
+        yaxis_title="Total no of Movies"
+    )
 
     gantt_plt = plt1.plot(fig, output_type='div')
     return gantt_plt
 
-def get_plot1(d,g,y):
+def get_plot1(d):
     mask=np.array(Image.open(r'E:\movies\wordlogo.png'))
     wc = WordCloud(mask=mask,min_font_size=10, background_color='black',contour_color='white', contour_width=10, colormap='Paired',width=mask.shape[1],height=mask.shape[0],random_state=42)
-    if g == 'all' and y == 'all':
-        df_wc = wc.generate(d['director'].str.cat(sep=' '))
-    elif g == "all" and y != "all":
-        d = d[d["start_year"] == y]
-        df_wc = wc.generate(d['director'].str.cat(sep=' '))
-    elif g != "all" and y == "all":
-        d= d[d[g] == 1]
-        df_wc = wc.generate(d['director'].str.cat(sep=' '))
-    else:
-        d = d[d["start_year"] == y]
-        d = d[d[g] == 1]
-        df_wc = wc.generate(d['director'].str.cat(sep=' '))
+    df_wc = wc.generate(d['director'].str.cat(sep=' '))
     figx=plt.figure()
     figx.patch.set_facecolor('black')
     plt.imshow(df_wc,interpolation='None')
@@ -149,132 +75,68 @@ def get_plot1(d,g,y):
 
 
 
-def get_plot2(rg,g,y):
+def get_plot2(data,g,y):
+    fig = px.histogram(data, x = "certificate", title="<b> Year wise Certificates (HistPlot with Boxplot)\t <total count : {}> </b>".format(len(data)), marginal="box", template="ggplot2", color_discrete_sequence=["#AB63FA"])
+    fig.update_layout(template = draft_template, paper_bgcolor = "black")
+    fig.update_layout(
+        font_color="white",
+        title_font_color="white",
+        legend_title_font_color="white"
+    )
+    gantt_plt=plt1.plot(fig,output_type='div')
+    return gantt_plt
 
-    if g == "all" and y == "all":
-        #plt.figure(figsize=(5, 6))
-        data = rg[rg["certificate"] != "Not Certified"]
-        data = data[data["certificate"] != "Not Rated"]
-        fig = px.histogram(data, x="certificate",
-                           title="<b> Year wise Certificates (HistPlot with Boxplot) [total count : {}] </b>".format(
-                               len(data)), marginal="box", template="ggplot2", color_discrete_sequence=["#AB63FA"])
-        fig.update_layout(template=draft_template, paper_bgcolor="black")
+
+def status(df,g,y):
+    pie = df["status"].value_counts()
+    fig = go.Figure(data=[go.Pie(labels=pie.index, values=pie, pull=[0, 0.2], hole = 0.3, title = "<b> MYN </b>")])
+    fig.update_traces(textposition="inside", textinfo="percent+label")
+    fig.update_layout(title="<b> Tv-Shows in {} year and {} genre </b>".format(y, g), height=450, width=450, paper_bgcolor = "black")
+    fig.update_layout(
+        font_color="white",
+        title_font_color="white",
+        xaxis_title="Name of Stars",
+        yaxis_title="Total no of Movies"
+    )
+    gantt_plt=plt1.plot(fig,output_type='div')
+    return gantt_plt
+
+
+
+
+
+
+def time(data,g, y):
+    rg = data.groupby("start_year")["rating"].mean().reset_index()
+    fig = px.scatter(rg, x="start_year", y="rating", color="start_year", size='rating')
+    fig.update_layout(template = draft_template, paper_bgcolor = "black", title="<b> Avarage Rating of Movies in {} year, {} Genre </b>".format(y,g))
+    fig.update_layout(
+        font_color="white",
+        title_font_color="white",
+        legend_title_font_color="white"
+    )
+    gantt_plt = plt1.plot(fig, output_type='div')
+    return gantt_plt
+def line_time(data,g,y):
+    line = data.groupby("start_year")["time"].agg("sum").reset_index()
+    if y=='all':
+        fig = px.line(line, x="start_year", y="time")
+        fig.update_layout(template = draft_template, paper_bgcolor = "black", title="<b> Total Time of Movies in {} year, {} Genre </b>".format(y, g))
         fig.update_layout(
             font_color="white",
             title_font_color="white",
             legend_title_font_color="white"
         )
-
-
-    elif g == "all" and y != "all":
-        #plt.figure(figsize=(5, 6))
-        data = rg[rg["start_year"] == y]
-        data = data[data["certificate"] != "Not Certified"]
-        data = data[data["certificate"] != "Not Rated"]
-        fig = px.histogram(data, x="certificate",
-                           title="<b> Year wise Certificates (HistPlot with Boxplot)\t <total count : {}> </b>".format(
-                               len(data)), color="start_year", marginal="box", template="ggplot2",
-                           color_discrete_sequence=["#AB63FA"])
-        fig.update_layout(template=draft_template, paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-
-    elif g != "all" and y == "all":
-        #plt.figure(figsize=(5, 6))
-        data = rg[rg[g] == 1]
-        data = data[data["certificate"] != "Not Certified"]
-        data = data[data["certificate"] != "Not Rated"]
-        fig = px.histogram(data, x="certificate",
-                           title="<b> Year wise Certificates (HistPlot with Boxplot)\t <{} count : {}> </b>".format(
-                               g, len(data)), color="start_year", marginal="box", template="ggplot2",
-                           color_discrete_sequence=["#AB63FA"])
-        fig.update_layout(template=draft_template, paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-
     else:
-        #plt.figure(figsize=(5, 6))
-        data = rg[rg["start_year"] == y]
-        data = data[data[g] == 1]
-        data = data[data["certificate"] != "Not Certified"]
-        data = data[data["certificate"] != "Not Rated"]
-        fig = px.histogram(data, x="certificate",
-                           title="<b> Year wise Certificates (HistPlot with Boxplot)\t <{} count : {}> </b>".format(
-                               g, len(data)), color="start_year", marginal="box", template="ggplot2",
-                           color_discrete_sequence=["#AB63FA"])
-        fig.update_layout(template=draft_template, paper_bgcolor="black")
+        fig = px.bar(line, x="start_year", y="time")
+        fig.update_layout(template=draft_template, paper_bgcolor="black",
+                          title="<b> Total Time of Movies in {} year, {} Genre </b>".format(y, g))
         fig.update_layout(
             font_color="white",
             title_font_color="white",
             legend_title_font_color="white"
         )
-    gantt_plt=plt1.plot(fig,output_type='div')
+
+    gantt_plt = plt1.plot(fig, output_type='div')
     return gantt_plt
 
-
-def status(d,g,y):
-    if g == "all" and y == "all":
-        pie = d["status"].value_counts()
-        fig = go.Figure(data=[
-            go.Pie(labels=pie.index, values=pie, pull=[0, 0.2], hole=0.3, title="<b>MYN</b>")])
-        fig.update_traces(textposition="inside", textinfo="percent+label")
-        fig.update_layout(title="<b> M/S in All year </b>", height=450, width=450)
-        fig.update_layout(paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-
-
-
-    elif g == "all" and y != "all" and y != 0:
-        rg = d[d["start_year"] == y]
-        pie = rg["status"].value_counts()
-        fig = go.Figure(
-            data=[go.Pie(labels=pie.index, values=pie, pull=[0, 0.2], hole=0.3, title="<b>MYN</b>")])
-        fig.update_traces(textposition="inside", textinfo="percent+label")
-        fig.update_layout(title="<b> M/S in {} year </b>".format(y), height=450, width=450)
-        fig.update_layout(paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-
-
-    elif g != "all" and y != "all" and y != 0:
-        d = d[d[g] == 1]
-        rg = d[d["start_year"] == y]
-        pie = rg["status"].value_counts()
-        fig = go.Figure(
-            data=[go.Pie(labels=pie.index, values=pie, pull=[0, 0.2], hole=0.3, title="<b>MYN</b>")])
-        fig.update_traces(textposition="inside", textinfo="percent+label")
-        fig.update_layout(title="<b> M/S in {} genre {} year </b>".format(g,y), height=450, width=450)
-        fig.update_layout(paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-    elif g != "all" and y == "all":
-        rg = d[d[g] == 1]
-        pie = rg["status"].value_counts()
-        fig = go.Figure(
-            data=[go.Pie(labels=pie.index, values=pie, pull=[0, 0.2], hole=0.3, title="<b>MYN</b>")])
-        fig.update_traces(textposition="inside", textinfo="percent+label")
-        fig.update_layout(title="<b> M/S in {} genre </b>".format(g), height=450, width=450)
-        fig.update_layout(paper_bgcolor="black")
-        fig.update_layout(
-            font_color="white",
-            title_font_color="white",
-            legend_title_font_color="white"
-        )
-    gantt_plt=plt1.plot(fig,output_type='div')
-    return gantt_plt

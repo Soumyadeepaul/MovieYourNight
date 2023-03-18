@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us</title>
+<link rel="icon" type="image/x-icon" href="https://www.linkpicture.com/q/logo_104.jpg">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #03ecfc;
+  color: black;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<div class="about-section">
+  <h1>About Us Page</h1>
+  <h3>We are Movie Your Night or you can call us 'MYN' - we are here to colourful you nights with some top notch movie recommendations in just few clicks. We differ from others by providing the service of statistical analytic dashboard and we hope that you would love this feature.</h3>
+  <p>This website is not commercial based rather a project based work where we have using programming languages link Python, HTML, CSS, Javascript, SQL and major packages used in this project are Selenium, Pandas, Plotly backend is fully based on Django Framework.</p>
+</div>
+
+<h2 style="text-align:center">Our Team</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/20230316_224829.jpg" alt="Soumyadeep Paul" style="width:100%">
+      <div class="container">
+        <h2>Soumyadeep Paul</h2>
+        <p class="title">SuperUser Admin</p>
+        <p></p>
+        <h4>Email <p><a href="mailto: paulsoumyadeep7@gmail.com">paulsoumyadeep7@gmail.com</a></p></h4>
+
+        <h4>Contributions </h4>
+        <ul>
+          <li>Data Scraping</li>
+          <li>Data Cleaning</li>
+          <li>Data Analysis</li>
+          <li>Model Making</li>
+          <li>Front-end Development</li>
+          <li>Back-end Development</li>
+          <li>Database Management</li>
+        </ul>
+        <p><button class="button" onclick="window.location.href='https://www.linkedin.com/in/paulsoumyadeep_cse';">Linkedin</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/Profile-picture_2.png" alt="Ritwik Ganguly" style="width:100%">
+      <div class="container">
+        <h2>Ritwik Ganguly</h2>
+        <p class="title">User Admin</p>
+        <p></p>
+        <h4>Email <p><a href="mailto: gangulyritwik2003@gmail.com">gangulyritwik2003@gmail.com</a></p></h4>
+        <h4>Contributions </h4>
+        <ul>
+          <li>Data Scraping</li>
+          <li>Data Cleaning</li>
+          <li>Data Analysis</li>
+          <li>Data Visualization</li>
+        </ul>
+        <p><button class="button" onclick="window.location.href='https://www.linkedin.com/in/ritwikganguly003';">Linkedin</button></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div>
+  <a onclick="window.history.go(-1)"><button class="btn btn-outline-info">Back</button></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>

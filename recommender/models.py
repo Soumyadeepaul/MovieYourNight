@@ -20,7 +20,7 @@ class details(models.Model):
     status = models.TextField(null=True)
     certificate_meaning=models.TextField(null=True)
     comedy=models.IntegerField(null=True)
-    Sci_fi= models.IntegerField(null=True)
+    sci_fi= models.IntegerField(null=True)
     horror= models.IntegerField(null=True)
     romance= models.IntegerField(null=True)
     action=models.IntegerField(null=True)
@@ -43,6 +43,7 @@ class details(models.Model):
     superhero=models.IntegerField(null=True)
     war= models.IntegerField(null=True)
     western=models.IntegerField(null=True)
+    tag=models.TextField(null=True)
 
 
 
@@ -50,13 +51,9 @@ class details(models.Model):
         return f"{self.movie_name}"
 
 
-class certificate(models.Model):
-    certifi=models.TextField(null=True)
-    count=models.IntegerField(null=True)
-
-
 
 class form(models.Model):
     age=models.IntegerField(null=True)
     year=models.IntegerField(null=True)
     genre=models.TextField(null=True)
+    movie=models.TextField(null=True)

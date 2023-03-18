@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Movie Your Night</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
       integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-
+    <link rel="icon" type="image/x-icon" href="https://www.linkpicture.com/q/logo_104.jpg">
 
     <style>
       body, html {
@@ -24,16 +24,65 @@
 
       /* Center and scale the image nicely */
       background-position: center;
-      background-repeat: no-repeat;
+      background-repeat: repeat;
       background-size: cover;
       }
       #result{
                 transition: transform 1s;
 
       }
-      #result:hover {
+      /* #result:hover {
         transform: translateX(50%);
-      }
+      }*/
+      .select2-container .select2-selection--single{
+            height:34px !important;
+        }
+        .select2-container--default .select2-selection--single{
+                 border: 1px solid #ccc !important;
+             border-radius: 0px !important;
+        }
+        .movie_name{
+            color: white;
+        }
+        .ratings{
+            color: white;
+        }
+        .genres{
+            color: white;
+        }
+        .votes{
+            color: white;
+        }
+        .stars{
+            color: white;
+        }
+        .description{
+            color: white;
+        }
+        .director{
+            color: white;
+        }
+        .certificate{
+            color: white;
+        }
+        .certificate_meaning{
+            color: white;
+        }
+        .metascore{
+            color: white;
+        }
+        .gross{
+            color: white;
+        }
+        .time{
+            color: white;
+        }
+        .imdb{
+            color: white;
+        }
+        #option1, #option2, #option3, #option4, #option5 {
+            color: white;
+        }
     </style>
 
 </head>
@@ -54,6 +103,9 @@
         <li class="nav-item">
           <a class="nav-link" href="dashboard/0all">Dashboard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="aboutus/">About us</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -61,12 +113,17 @@
 
 
 <!--FORM-->
-<div>
-    <h2 id="hold" style="color: #faaac6; padding-left: 40%; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"></h2>
+<div class="container text-center" >
+    <h2 class="container text-center" style="color: #faaac6; padding-left: 40%; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; padding-top: 1%; margin-bottom: 0%;">
+    <div class="col-6 col-md-4"></div>
+    <div class="col-6 col-md-4" id="hold"><b></b></div>
+    <div class="col-6 col-md-4"></div>
+    </h2>
 </div>
-<div class="container py-5 text-center">
+<div class="container text-center" style="padding-top: 4%;">
     <div class="row">
-    <div class="col-6 col-md-4 p-3 mb-2 bg-black" style= "--bs-bg-opacity: .5;">
+    <div class="col-6 col-md-4 p-3 mb-2 bg-black" style= "--bs-bg-opacity: .5; height: 75%;">
+        <div class="row">
         <form id="form" method="POST">
           {% csrf_token %}
           <div>
@@ -142,65 +199,637 @@
                   </div>
 
           </div>
+          <div class="mb-3 row g-3 align-items-center">
+                  <div class="col-auto"></div>
+                  <div class="col-auto"></div>
+                  <div class="col-auto">
+                      <label class="col-form-label" style="color: white;"><b>Movie</b></label>
+                  </div>
+                  <div class="col">
+                      <div class="container text-center">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <input type="search" id="search" class="form-control" style="width: 100%; height:37px;">
+
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-light" type="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="resultsearch()">Search</button>
+
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+
+                  <div class="row">
+
+                        <div class="col">
+                          <p id="errorsearch" style="color: red;"></p>
+                          <ul id="myDropdown" style="display: none;">
+                              <h4 style="color: green; background-color: white;">Top 5 results</h4>
+                              <li id="option1"></li>
+                              <li id="option2"></li>
+                              <li id="option3"></li>
+                              <li id="option4"></li>
+                              <li id="option5"></li>
+                          </ul>
+
+                        </div>
+                  </div>
+          </div>
           <button type="button" class="btn btn-outline-warning" onclick="history.go(0)">Redo</button>
-          <button type="submit" id='result' form="form" class="btn btn-outline-success" onclick="check()">Result</button>
+          <button type="submit" id='result' form="form" class="btn btn-outline-danger" onclick="check()">Result</button>
         </form>
+        </div>
 
-
-
-
-
-
-
+        <div class="row" style="padding-top: 10px;">
+            <div class="col">
+                <p style="color: white;">Explore the latest feature <a href="" onclick="dash()" id="dash">Statistics</a> </p>
+            </div>
+        </div>
 
 
 
     </div>
-    <div class="col-6 col-md-4">
-        <img id="movie1img" src="" style="">
-        <p id="movie1" style="color: red;"></p>
+    <div class="col-6 col-md-4" style="font-size: small;">
+        <div class="row text-center">
+            <div>
+                <img id="movie1img" src="" style="">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="movie_name"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="movie1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center ">
+            <div class="col-auto">
+                <label class="genres"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="genre1" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="ratings"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="rating1" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="stars"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="stars1" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="director"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="director1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="time"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="time1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="description"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="description1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate_meaning"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate_meaning1" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="metascore"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="metascore1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="gross"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="gross1" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="votes"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="votes1" style="color: red;"></p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="imdb"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <a id="imdb1.2" href=""><p id="imdb1" style="color: red;"></p></a>
+            </div>
+        </div>
+
     </div>
-    <div class="col-6 col-md-4"></div>
+
+    <div class="col-6 col-md-4 text-center" style="font-size: small;">
+        <div class="row text-center">
+            <div>
+                <img id="movie2img" src="" style="">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="movie_name"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="movie2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="genres"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="genre2" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="ratings"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="rating2" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="stars"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="stars2" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="director"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="director2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="time"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="time2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="description"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="description2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate_meaning"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate_meaning2" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="metascore"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="metascore2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="gross"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="gross2" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="votes"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="votes2" style="color: red;"></p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="imdb"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <a id="imdb2.2" href=""><p id="imdb2" style="color: red;" ></p></a>
+
+            </div>
+        </div>
+
     </div>
-    <div></div>
-    <div class="row">
+    </div>
+    <div>
+    <h2 id="hold1" class="container text-center" style="color: #faaac6; padding-left: 40%; font-family:'Franklin Gothic Medium', 'Arial Narrow text-center', Arial, sans-serif;">
+        <div class="col-6 col-md-4"></div>
+        <div class="col-6 col-md-4" id="recom-movie"></div>
+        <div class="col-6 col-md-4"></div>
+    </h2>
+    </div>
+    <div class="row text-center">
         <div class="col-6 col-md-4">
-            <p>Explore the latest feature <a href="" onclick="dash()" id="dash">Statistics</a> </p>
 
         </div>
-        <div class="col-6 col-md-4"></div>
-        <div class="col-6 col-md-4"></div>
+        <div class="col-6 col-md-4" style="font-size: small;">
+            <div class="row text-center">
+            <div>
+                <img id="movie3img" src="" style="">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="movie_name"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="movie3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="genres"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="genre3" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="ratings"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="rating3" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="stars"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="stars3" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="director"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="director3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="time"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="time3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="description"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="description3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate_meaning"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate_meaning3" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="metascore"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="metascore3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="gross"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="gross3" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="votes"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="votes3" style="color: red;"></p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="imdb"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <a id="imdb3.2" href=""><p id="imdb3" style="color: red;" ></p></a>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-6 col-md-4 text-center" style="font-size: small;">
+            <div class="row text-center">
+            <div>
+                <img id="movie4img" src="" style="">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="movie_name"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="movie4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="genres"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="genre4" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="ratings"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="rating4" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="stars"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="stars4" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="director"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="director4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="time"><b></b></label>
+            </div>
+            <div class="col-auto">
+                 <p id="time4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="description"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="description4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="certificate_meaning"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="certificate_meaning4" style="color: red;"></p>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="metascore"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="metascore4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="gross"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="gross4" style="color: red;"></p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="votes"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <p id="votes4" style="color: red;"></p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-auto">
+                <label class="imdb"><b></b></label>
+            </div>
+            <div class="col-auto">
+                <a id="imdb4.2" href=""><p id="imdb4" style="color: red;"></p></a>
+            </div>
+        </div>
+
+        </div>
+
     </div>
-
-
 
 </div>
 
 <script>
+
     function check(){
     var age=document.getElementById('age').value;
     var year=document.getElementById('year').value;
+    var inp=document.getElementById('search').value;
+    var movie="{{ movie }}";
+    console.log(inp)
+    const regex = '[\\s]'+inp+'[-a-z:A-Z\\s]*';
+    console.log(regex)
+    // Conversion from string to RegExp
+    const reg = new RegExp(regex, "gi");
+
+    // The match fn returns the array of strings
+    // That match to RegExp
+    const result = movie.match(reg);
+    console.log(result)
+
+    console.log(result.includes(' '+inp));
+
     if (age>99 || age<10){
         alert('Wrong Age');
-        document.getElementById('age').value=21;
+        document.getElementById('age').value='';
         document.getElementById('year').value=year;
         document.getElementById('errorage').innerHTML='Enter Correct Age';
         document.getElementById('erroryear').innerHTML='';
     }
 
-    else if ((year>2023 || year<1800) && year!='SinceBeginning'){
+    else if (year>2023 || year<1800){
         alert('Wrong year');
         document.getElementById('age').value=age;
         document.getElementById('errorage').innerHTML='';
         document.getElementById('year').value='SinceBeginning';
         document.getElementById('erroryear').innerHTML='Enter Correct Year/SinceBeginning';
     }
+    else if (year!='SinceBeginning'){
+        alert('Wrong year');
+        document.getElementById('age').value=age;
+        document.getElementById('errorage').innerHTML='';
+        document.getElementById('year').value='SinceBeginning';
+        document.getElementById('erroryear').innerHTML='Enter Correct Year/SinceBeginning';
+    }
+    else if (inp == ''){
+        document.getElementById('errorsearch').innerHTML='Enter Movie Name';
+    }
+
+    else if (result.includes(' '+inp)==false){
+        document.getElementById('errorsearch').innerHTML='Enter accurate Movie Name';
+    }
     else {
     document.getElementById('errorage').innerHTML='';
     document.getElementById('erroryear').innerHTML='';
-    document.getElementById('movie1img').src='https://m.media-amazon.com/images/M/MV5BODZhNzlmOGItMWUyYS00Y2Q5LWFlNzMtM2I2NDFkM2ZkYmE1XkEyXkFqcGdeQXVyMTU5OTA4NTIz._V1_UX67_CR0,0,67,98_AL_.jpg';
-    document.getElementById('movie1').innerHTML='Hello India!';
-    document.getElementById('movie1img').style= 'width: 40%; height: auto; image-resolution: 300dpi;'
+    document.getElementById('hold').innerHTML="It's coming MYN is processing";
     }
     }
 
@@ -216,6 +845,40 @@
         else{
             document.getElementById('dash').href='dashboard/'+0+genre;
         }
+    }
+
+    function resultsearch(){
+      var inp=document.getElementById('search').value;
+      if (inp.length<3){
+        document.getElementById('errorsearch').innerHTML='Enter atleast 3 alphabates';
+      }
+      else{
+        var movie="{{ movie }}";
+        console.log(inp)
+        const regex = '[\\s]'+inp+'[-a-z:A-Z\\s]*';
+        console.log(regex)
+        // Conversion from string to RegExp
+        const reg = new RegExp(regex, "gi");
+
+        // The match fn returns the array of strings
+        // That match to RegExp
+        const result = movie.match(reg);
+
+        if (result==null){
+            document.getElementById('errorsearch').innerHTML='No Match Found';
+        }
+        else{
+            document.getElementById('errorsearch').innerHTML='';
+
+            document.getElementById("option1").innerHTML = result[0];
+            document.getElementById("option2").innerHTML = result[1];
+            document.getElementById("option3").innerHTML = result[2];
+            document.getElementById("option4").innerHTML = result[3];
+            document.getElementById("option5").innerHTML = result[4];
+            document.getElementById("myDropdown").style.display="block";
+        }
+
+      }
     }
 
 
@@ -235,8 +898,98 @@
                 age:$("#age").val(),
                 year:$("#year").val(),
                 genre:$("#genre").val(),
+                movie:$('#search').val(),
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
             },
+            success: function(data){
+                console.log(data);
+                var data=data;
+                data=(data).toString();
+                console.log(data);
+                const arr=JSON.parse(data);
+                $('#hold').html('Recommended with genre and year');
+                $('#recom-movie').html('Recommended with movie');
+                $('#movie1img').attr('src',arr[0]);
+                $("#movie1").html(arr[1]);
+                $("#genre1").html(arr[2]);
+                $("#rating1").html(arr[3]);
+                $("#stars1").html(arr[4]);
+                $("#director1").html(arr[5]);
+                $("#time1").html(arr[6]+' min');
+                $("#description1").html(arr[7]);
+                $("#certificate1").html(arr[8]);
+                $("#certificate_meaning1").html(arr[9]);
+                $("#metascore1").html(arr[10]);
+                $("#gross1").html(arr[11]);
+                $("#votes1").html(arr[12]);
+                $('#imdb1').html('Link');
+                document.getElementById('imdb1.2').href=arr[52];
+
+
+
+                $('#movie2img').attr('src',arr[13]);
+                $("#movie2").html(arr[14]);
+                $("#genre2").html(arr[15]);
+                $("#rating2").html(arr[16]);
+                $("#stars2").html(arr[17]);
+                $("#director2").html(arr[18]);
+                $("#time2").html(arr[19]+' min');
+                $("#description2").html(arr[20]);
+                $("#certificate2").html(arr[21]);
+                $("#certificate_meaning2").html(arr[22]);
+                $("#metascore2").html(arr[23]);
+                $("#gross2").html(arr[24]);
+                $("#votes2").html(arr[25]);
+                $('#imdb2').html('Link');
+                document.getElementById('imdb2.2').href=arr[53];
+
+                $('#movie3img').attr('src',arr[26]);
+                $("#movie3").html(arr[27]);
+                $("#genre3").html(arr[28]);
+                $("#rating3").html(arr[29]);
+                $("#stars3").html(arr[30]);
+                $("#director3").html(arr[31]);
+                $("#time3").html(arr[32]+' min');
+                $("#description3").html(arr[33]);
+                $("#certificate3").html(arr[34]);
+                $("#certificate_meaning3").html(arr[35]);
+                $("#metascore3").html(arr[36]);
+                $("#gross3").html(arr[37]);
+                $("#votes3").html(arr[38]);
+                $('#imdb3').html('Link');
+                document.getElementById('imdb3.2').href=arr[54];
+
+                $('#movie4img').attr('src',arr[39]);
+                $("#movie4").html(arr[40]);
+                $("#genre4").html(arr[41]);
+                $("#rating4").html(arr[42]);
+                $("#stars4").html(arr[43]);
+                $("#director4").html(arr[44]);
+                $("#time4").html(arr[45]+' min');
+                $("#description4").html(arr[46]);
+                $("#certificate4").html(arr[47]);
+                $("#certificate_meaning4").html(arr[48]);
+                $("#metascore4").html(arr[49]);
+                $("#gross4").html(arr[50]);
+                $("#votes4").html(arr[51]);
+                $('#imdb4').html('Link');
+                document.getElementById('imdb4.2').href=arr[55];
+
+                $(".movie_name").html('Movie Name ');
+                $(".genres").html('Genre ');
+                $(".ratings").html('Rating ');
+                $(".stars").html('Stars ');
+                $(".director").html('Directors ');
+                $(".time").html('Duration ');
+                $(".description").html('Description ');
+                $(".certificate").html('Certificate ');
+                $(".certificate_meaning").html('Certificate Meaning ');
+                $(".metascore").html('Metascore ');
+                $(".gross").html('Gross ');
+                $(".votes").html('Votes ');
+                $(".imdb").html('Imdb Link ');
+            }
+
         })
     });
 </script>
