@@ -38,7 +38,7 @@ def get_graph():
     buffer.close()
     return graph
 
-def get_plot(data,g,y):
+def stars(data,g,y):
     bar = data["first_name"].value_counts()[1:16]
     fig = px.bar(bar,
        x = bar.index,
@@ -61,7 +61,7 @@ def get_plot(data,g,y):
     gantt_plt = plt1.plot(fig, output_type='div')
     return gantt_plt
 
-def get_plot1(d):
+def wordcloud(d):
     mask=np.array(Image.open(r'E:\movies\wordlogo.png'))
     wc = WordCloud(mask=mask,min_font_size=10, background_color='black',contour_color='white', contour_width=10, colormap='Paired',width=mask.shape[1],height=mask.shape[0],random_state=42)
     df_wc = wc.generate(d['director'].str.cat(sep=' '))
@@ -75,7 +75,7 @@ def get_plot1(d):
 
 
 
-def get_plot2(data,g,y):
+def certificate(data,g,y):
     fig = px.histogram(data, x = "certificate", title="<b> Year wise Certificates (HistPlot with Boxplot)\t <total count : {}> </b>".format(len(data)), marginal="box", template="ggplot2", color_discrete_sequence=["#AB63FA"])
     fig.update_layout(template = draft_template, paper_bgcolor = "black")
     fig.update_layout(
@@ -106,7 +106,7 @@ def status(df,g,y):
 
 
 
-def time(data,g, y):
+def rating(data,g, y):
     rg = data.groupby("start_year")["rating"].mean().reset_index()
     fig = px.scatter(rg, x="start_year", y="rating", color="start_year", size='rating')
     fig.update_layout(template = draft_template, paper_bgcolor = "black", title="<b> Avarage Rating of Movies in {} year, {} Genre </b>".format(y,g))

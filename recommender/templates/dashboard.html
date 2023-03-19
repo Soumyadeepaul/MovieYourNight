@@ -40,8 +40,8 @@
           <div class="col-md-8">
             <!-- Image 1 of stars -->
             <div class="col-6 col-md-4">
-                {% if chart %}
-                <a href="/1">{{chart|safe}}</a>
+                {% if chart1 %}
+                <a href="/1">{{chart1|safe}}</a>
                 {% endif %}
             </div>
           </div>
@@ -113,22 +113,22 @@
         </div>
         <!-- Row 3 -->
         <div class="row">
-          <!-- Image 2 Average Time -->
+          <!-- Image 2 Average rating -->
           <div class="col-6 col-md-4">
-              {% if chart4 %}
-              <a href="/4">{{chart4|safe}}</a>
+              {% if chart5 %}
+              <a href="/5">{{chart5|safe}}</a>
               {% endif %}
           </div>
           <!-- Image 3 For movie/series -->
           <div class="col-6 col-md-4">
-                {% if chart3 %}
-                <a href="/3">{{chart3|safe}}</a>
+                {% if chart4 %}
+                <a href="/4">{{chart4|safe}}</a>
                 {% endif %}
           </div>
-          <!-- Image 4 for average rating -->
+          <!-- Image 4 for average time -->
           <div class="col-6 col-md-4">
-              {% if chart5 %}
-              <a href="/2">{{chart5|safe}}</a>
+              {% if chart6 %}
+              <a href="/6">{{chart6|safe}}</a>
               {% endif %}
           </div>
         </div>
@@ -142,8 +142,8 @@
                     <h4>WordCloud for Directors</h4>
                 </div>
                 <div class="col">
-                {% if chart1 %}
-                <a href="/5"><img src="data:image/png;base64,{{chart1|safe}}" style="width: 600px; height:400px;"></a>
+                {% if chart2 %}
+                <a href="/2"><img src="data:image/png;base64,{{chart2|safe}}" style="width: 600px; height:400px;"></a>
                 {% endif %}
                 </div>
             </div>
@@ -151,8 +151,8 @@
           </div>
           <!-- Image 6 for certificate  -->
           <div class="col-6">.
-              {% if chart2 %}
-              <a href="/6">{{chart2|safe}}</a>
+              {% if chart3 %}
+              <a href="/3">{{chart3|safe}}</a>
               {% else %}
                 <p>NO GRAPH</p>
               {% endif %}
