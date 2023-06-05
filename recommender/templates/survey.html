@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Title -->
+    <title>Movie Your Night</title>
+    <!-- Bootstram css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Ajax jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    <!-- icon in tab -->
+    <link rel="icon" type="image/x-icon" href="https://www.linkpicture.com/q/logo_104.jpg">
+    <!-- background of page -->
+    <!-- color of text when recommendation will come -->
+    <!-- color of options in movie search -->
+    <style>
+      body, html {
+      height: 100%;
+      }
+
+      .bg {
+      /* The image used */
+      background-image: url("https://i0.wp.com/post.healthline.com/wp-content/uploads/2020/09/full-moon-night-landscape-1296x728-header-1.jpg?w=1845");
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: repeat;
+      background-size: cover;
+      }
+
+      .label{
+      color: white;
+      }
+      .movie_name{
+            color: white;
+        }
+        .ratings{
+            color: white;
+        }
+        .genres{
+            color: white;
+        }
+        .votes{
+            color: white;
+        }
+        .stars{
+            color: white;
+        }
+        .description{
+            color: white;
+        }
+        .director{
+            color: white;
+        }
+        .certificate{
+            color: white;
+        }
+        .certificate_meaning{
+            color: white;
+        }
+        .metascore{
+            color: white;
+        }
+        .gross{
+            color: white;
+        }
+        .time{
+            color: white;
+        }
+        .imdb{
+            color: white;
+        }
+        .label1{
+          color: white;
+          display: none;
+          }
+          .radio1,.radio2,.radio3,.radio4{
+            display: none;
+          }
+    </style>
+</head>
+<body class = "bg">
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+            <button type="button" id='back' class="btn btn-light" onclick="window.history.go(-1)" >Back</button>
+            <button type="button" id='back1' class="btn btn-light" onclick="window.location.href='/'" style="display: none;">Back</button>
+        </div>
+        <div class="col-6 col-md-4 p-3 mb-2 bg-black" style= "--bs-bg-opacity: .5; height: 75%;">
+          <form class="form" method="POST">
+            {% csrf_token %}
+              <div class="mb-3 row g-3 align-items-center">
+                  <!-- some spave before the text -->
+                <div class="col-auto">
+                    <!-- AGE label -->
+                    <label for="name1" class="col-form-label" style="color: white;"><b>User Name:</b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- AGE text box -->
+                    <input type="text" id="name1" class="form-control" name="name1" style="width: 100%; height: 1%" onclick="this.setSelectionRange(0, this.value.length)" required>
+                </div>
+
+              </div>
+                <!-- age error line with js -->
+              <p id="errorage" style="color: red;"></p>
+              <div>
+                <label for="message" class="label">Genres:</label>
+                <p class="label" style="font-size: small;">Maximum 3 genre</p>
+                <input type="checkbox" class="check" name="gen" value="comedy">
+                <label for="comedy" class="label">Comedy &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="action">
+                <label for="action" class="label">Action &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="adventure">
+                <label for="adventure" class="label">Adventure &nbsp;&nbsp;</label><br>
+                <input type="checkbox" class="check" name="gen" value="horror">
+                <label for="horror" class="label">Horror &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="sci_fi">
+                <label for="sci_fi" class="label">Sci-Fi &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="romance">
+                <label for="romance" class="label">Romance &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="thriller">
+                <label for="thriller" class="label">Thriller &nbsp;&nbsp;</label><br>
+                <input type="checkbox" class="check" name="gen" value="drama">
+                <label for="drama" class="label">Drama &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="mystery">
+                <label for="mystery" class="label">Mystery &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="crime">
+                <label for="crime" class="label">Crime &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="animation">
+                <label for="animation" class="label">Animation &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="fantasy">
+                <label for="fantasy" class="label">Fantasy &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="family">
+                <label for="family" class="label">Family &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="biography">
+                <label for="biography" class="label">Biography &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="docum">
+                <label for="docum" class="label">Documentry &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="film_noir">
+                <label for="film_noir" class="label">Film-Noir &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="music">
+                <label for="music" class="label">Music &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="war">
+                <label for="war" class="label">War &nbsp;&nbsp;</label>
+                <input type="checkbox" class="check" name="gen" value="western">
+                <label for="western" class="label">Western &nbsp;&nbsp;</label>
+              </div>
+              <p id="now_this1" class="label" style="color: red;"></p>
+              <button type="submit" id="submit" class="btn btn-outline-warning" disabled>Submit</button>
+        </form>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <hr>
+      <form class="form">
+      <div class="container text-center">
+          <p id="now_this" class="label"></p>
+        <div class="row align-items-start">
+          <div class="col">
+              <div>
+                  <label for="rating" class="label1">Rate it:</label><br>
+                    <input type="radio" class="radio1" name="rate1" value="1" checked>
+                    <label for="rate1" class="label1">1 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio1" name="rate1" value="2">
+                    <label for="rate2" class="label1">2 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio1" name="rate1" value="3">
+                    <label for="rate3" class="label1">3 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio1" name="rate1" value="4">
+                    <label for="rate4" class="label1">4 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio1" name="rate1" value="5">
+                    <label for="rate5" class="label1">5 &nbsp;&nbsp;</label>
+              </div>
+              <div class="row text-center">
+                <div>
+                    <!-- IMAGE -->
+                    <img id="movie1img" src="" style="">
+                </div>
+              </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <!-- MOVIE label -->
+                    <label class="movie_name"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- MOVIE NAME -->
+                    <p id="movie1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center ">
+                <div class="col-auto">
+                    <label class="genres"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- GENRE -->
+                    <p id="genre1" style="color: red;"></p>
+                </div>
+            </div>
+
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="ratings"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- RATING -->
+                     <p id="rating1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="stars"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- STARS -->
+                    <p id="stars1" style="color: red;"></p>
+                </div>
+            </div>
+
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="director"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- DIRECTOR -->
+                    <p id="director1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="time"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- TIME -->
+                     <p id="time1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="description"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- DESCRIPTION -->
+                    <p id="description1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- CERTIFICATE -->
+                    <p id="certificate1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate_meaning"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- CERTIFICATE MEANING -->
+                    <p id="certificate_meaning1" style="color: red;"></p>
+                </div>
+            </div>
+
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="metascore"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- METASCORE -->
+                    <p id="metascore1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="gross"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- GROSS -->
+                    <p id="gross1" style="color: red;"></p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-auto">
+                    <!-- VOTES -->
+                    <label class="votes"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="votes1" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="imdb"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <!-- IMDB LINK -->
+                    <a id="imdb1.2" href=""><p id="imdb1" style="color: red;"></p></a>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+              <div>
+                  <label for="rating" class="label1">Rate it:</label><br>
+                    <input type="radio" class="radio2" name="rate2" value="1" checked>
+                    <label for="rate1" class="label1">1 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio2" name="rate2" value="2">
+                    <label for="rate2" class="label1">2 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio2" name="rate2" value="3">
+                    <label for="rate3" class="label1">3 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio2" name="rate2" value="4">
+                    <label for="rate4" class="label1">4 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio2" name="rate2" value="5">
+                    <label for="rate5" class="label1">5 &nbsp;&nbsp;</label>
+              </div>
+
+
+            <div class="row text-center">
+                <div>
+                    <img id="movie2img" src="" style="">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="movie_name"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="movie2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="genres"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="genre2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="ratings"><b></b></label>
+                </div>
+                <div class="col-auto">
+                     <p id="rating2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="stars"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="stars2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="director"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="director2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="time"><b></b></label>
+                </div>
+                <div class="col-auto">
+                     <p id="time2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="description"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="description2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="certificate2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate_meaning"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="certificate_meaning2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="metascore"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="metascore2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="gross"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="gross2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="votes"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="votes2" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="imdb"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <a id="imdb2.2" href=""><p id="imdb2" style="color: red;" ></p></a>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+              <div>
+                  <label for="rating" class="label1">Rate it:</label><br>
+                    <input type="radio" class="radio3" name="rate3" value="1" checked>
+                    <label for="rate1" class="label1">1 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio3" name="rate3" value="2">
+                    <label for="rate2" class="label1">2 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio3" name="rate3" value="3">
+                    <label for="rate3" class="label1">3 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio3" name="rate3" value="4">
+                    <label for="rate4" class="label1">4 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio3" name="rate3" value="5">
+                    <label for="rate5" class="label1">5 &nbsp;&nbsp;</label>
+              </div>
+              <div class="row text-center">
+                <div>
+                    <img id="movie3img" src="" style="">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="movie_name"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="movie3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="genres"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="genre3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="ratings"><b></b></label>
+                </div>
+                <div class="col-auto">
+                     <p id="rating3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="stars"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="stars3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="director"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="director3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="time"><b></b></label>
+                </div>
+                <div class="col-auto">
+                     <p id="time3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="description"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="description3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="certificate3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="certificate_meaning"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="certificate_meaning3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="metascore"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="metascore3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="gross"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="gross3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="votes"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <p id="votes3" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-auto">
+                    <label class="imdb"><b></b></label>
+                </div>
+                <div class="col-auto">
+                    <a id="imdb3.2" href=""><p id="imdb3" style="color: red;" ></p></a>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+              <div>
+                  <label for="rating" class="label1">Rate it:</label><br>
+                    <input type="radio" class="radio4" name="rate4" value="1" checked>
+                    <label for="rate1" class="label1">1 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio4" name="rate4" value="2">
+                    <label for="rate2" class="label1">2 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio4" name="rate4" value="3">
+                    <label for="rate3" class="label1">3 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio4" name="rate4" value="4">
+                    <label for="rate4" class="label1">4 &nbsp;&nbsp;</label>
+                    <input type="radio" class="radio4" name="rate4" value="5">
+                    <label for="rate5" class="label1">5 &nbsp;&nbsp;</label>
+              </div>
+              <div class="row text-center">
+                    <div>
+                        <img id="movie4img" src="" style="">
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="movie_name"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="movie4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="genres"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="genre4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="ratings"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                         <p id="rating4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="stars"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="stars4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="director"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="director4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="time"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                         <p id="time4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="description"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="description4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="certificate"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="certificate4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="certificate_meaning"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="certificate_meaning4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="metascore"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="metascore4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="gross"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="gross4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="votes"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <p id="votes4" style="color: red;"></p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <label class="imdb"><b></b></label>
+                    </div>
+                    <div class="col-auto">
+                        <a id="imdb4.2" href=""><p id="imdb4" style="color: red;"></p></a>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+    <script>
+
+
+        $("input:checkbox").click(function(){
+        var bol1=$("input:checkbox:checked").length>0;
+        if (bol1==true){
+            document.getElementById("submit").disabled=false;
+        }
+        else {
+            document.getElementById("submit").disabled=true;
+        }
+        var bol=$("input:checkbox:checked").length>=3;
+        $("input:checkbox").not(":checked").attr("disabled",bol);
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+
+        //submit form without refreshing the page
+        $(document).on('submit','.form',function(e){
+            //to prevent refresh
+
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{% url "survey" %}',
+                data:{
+                    //store the values from form and pass to the request.POST
+                    name1: $('[name=name1]').val(),
+
+                    genre: $('[name=gen]').serialize(),
+                    rate1: $('[name=rate1]:checked').val(),
+                    rate2: $('[name=rate2]:checked').val(),
+                    rate3: $('[name=rate3]:checked').val(),
+                    rate4: $('[name=rate4]:checked').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                //after succesfull of the python lines make changes in html
+                success: function(data){
+                    //get the json data str in this format "['']"
+                    var data=data;
+                    //JSON to string
+                    data=(data).toString();
+                    //parsing of JSON
+                    const arr=JSON.parse(data);
+                    if(arr[56]=='second'){
+                        $(".radio1").css("display","none");
+                        $(".radio2").css("display","none");
+                        $(".radio3").css("display","none");
+                        $(".radio4").css("display","none");
+                        $(".label1").css("display","none");
+                        $("#back1").css("display","inline");
+                        $("#now_this").html('');
+                        $("#now_this1").html('');
+                        document.getElementById("submit").disabled=true;
+                    }
+                    else{
+                    $(".radio1").css("display","inline");
+                    $(".radio2").css("display","inline");
+                    $(".radio3").css("display","inline");
+                    $(".radio4").css("display","inline");
+                    $(".label1").css("display","inline");
+                    $("#back").css("display","none");
+                    $("#now_this").html('Rate This Movies');
+                    $("#now_this1").html('Click This Button');
+                    }
+                    //change html hold
+                    //recommend 1st movie
+                    //$('#recom-movie').html('Recommended with movie');
+                    $('#movie1img').attr('src',arr[0]);
+                    $("#movie1").html(arr[1]);
+                    $("#genre1").html(arr[2]);
+                    $("#rating1").html(arr[3]);
+                    $("#stars1").html(arr[4]);
+                    $("#director1").html(arr[5]);
+                    $("#time1").html(arr[6]+' min');
+                    $("#description1").html(arr[7]);
+                    $("#certificate1").html(arr[8]);
+                    $("#certificate_meaning1").html(arr[9]);
+                    $("#metascore1").html(arr[10]);
+                    $("#gross1").html(arr[11]);
+                    $("#votes1").html(arr[12]);
+                    $('#imdb1').html('Link');
+                    //href
+                    document.getElementById('imdb1.2').href=arr[13];
+
+
+
+
+                    //recommend 2nd movie
+                    $('#movie2img').attr('src',arr[14]);
+                    $("#movie2").html(arr[15]);
+                    $("#genre2").html(arr[16]);
+                    $("#rating2").html(arr[17]);
+                    $("#stars2").html(arr[18]);
+                    $("#director2").html(arr[19]);
+                    $("#time2").html(arr[20]+' min');
+                    $("#description2").html(arr[21]);
+                    $("#certificate2").html(arr[22]);
+                    $("#certificate_meaning2").html(arr[23]);
+                    $("#metascore2").html(arr[24]);
+                    $("#gross2").html(arr[25]);
+                    $("#votes2").html(arr[26]);
+                    $('#imdb2').html('Link');
+                    //href
+                    document.getElementById('imdb2.2').href=arr[27];
+
+                    //recommend 3rd movie
+                    $('#movie3img').attr('src',arr[28]);
+                    $("#movie3").html(arr[29]);
+                    $("#genre3").html(arr[30]);
+                    $("#rating3").html(arr[31]);
+                    $("#stars3").html(arr[32]);
+                    $("#director3").html(arr[33]);
+                    $("#time3").html(arr[34]+' min');
+                    $("#description3").html(arr[34]);
+                    $("#certificate3").html(arr[36]);
+                    $("#certificate_meaning3").html(arr[37]);
+                    $("#metascore3").html(arr[38]);
+                    $("#gross3").html(arr[39]);
+                    $("#votes3").html(arr[40]);
+                    $('#imdb3').html('Link');
+                    //href
+                    document.getElementById('imdb3.2').href=arr[41];
+
+                    //recommend 4th movie
+                    $('#movie4img').attr('src',arr[42]);
+                    $("#movie4").html(arr[43]);
+                    $("#genre4").html(arr[44]);
+                    $("#rating4").html(arr[45]);
+                    $("#stars4").html(arr[46]);
+                    $("#director4").html(arr[47]);
+                    $("#time4").html(arr[48]+' min');
+                    $("#description4").html(arr[49]);
+                    $("#certificate4").html(arr[50]);
+                    $("#certificate_meaning4").html(arr[51]);
+                    $("#metascore4").html(arr[52]);
+                    $("#gross4").html(arr[53]);
+                    $("#votes4").html(arr[54]);
+                    $('#imdb4').html('Link');
+                    //href
+                    document.getElementById('imdb4.2').href=arr[55];
+
+
+
+
+
+
+
+
+
+                    //change html of classes
+                    $(".movie_name").html('Movie Name ');
+                    $(".genres").html('Genre ');
+                    $(".ratings").html('Rating ');
+                    $(".stars").html('Stars ');
+                    $(".director").html('Directors ');
+                    $(".time").html('Duration ');
+                    $(".description").html('Description ');
+                    $(".certificate").html('Certificate ');
+                    $(".certificate_meaning").html('Certificate Meaning ');
+                    $(".metascore").html('Metascore ');
+                    $(".gross").html('Gross ');
+                    $(".votes").html('Votes ');
+                    $(".imdb").html('Imdb Link ');
+                }
+            })
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+</html>
